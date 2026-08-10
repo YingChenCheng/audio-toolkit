@@ -1,0 +1,32 @@
+# Build Directories
+build/
+build-*/
+bin/
+lib/
+
+# CMake & Compiler Artifacts
+CMakeCache.txt
+CMakeFiles/
+CMakeUsers.txt
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# IDE & Editor Project Files
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# CLion / JetBrains
+.idea/
+cmake-build-*/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Mac OS System files
+.DS_Store
