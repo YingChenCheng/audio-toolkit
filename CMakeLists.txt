@@ -16,6 +16,18 @@ else()
     add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+include(FetchContent)
+
+FetchContent_Declare(
+    miniaudio
+    URL https://raw.githubusercontent.com/mackron/miniaudio/master/miniaudio.h
+    DOWNLOAD_NO_EXTRACT TRUE
+)
+FetchContent_MakeAvailable(miniaudio)
+
+add_library(miniaudio INTERFACE)
+target_include_directories(miniaudio INTERFACE ${miniaudio_SOURCE_DIR})
+
 add_subdirectory(src)
 add_subdirectory(apps)
 
