@@ -1,5 +1,6 @@
 #include "my_toolkit/sine_wave_player.hpp"
 #include <cmath>
+#include <numbers>
 #include <iostream>
 
 namespace audio_toolkit {
@@ -50,14 +51,14 @@ void SineWavePlayer::audio_callback(void* output_buffer, const void* input_buffe
     (void)input_buffer;
 
     float* out = static_cast<float*>(output_buffer);
-    const double phase_increment = 2.0 * M_PI * frequency_ / sample_rate_;
+    const double phase_increment = 2.0 * std::numbers::pi * frequency_ / sample_rate_;
 
     for (ma_uint32 i = 0; i < frame_count; ++i) {
         out[i] = 0.2f * static_cast<float>(std::sin(phase_));
 
         phase_ += phase_increment;
-        if (phase_ >= 2.0 * M_PI) {
-            phase_ -= 2.0 * M_PI;
+        if (phase_ >= 2.0 * std::numbers::pi) {
+            phase_ -= 2.0 * std::numbers::pi;
         }
     }
 }
