@@ -12,4 +12,17 @@ void AudioBuffer::clear() {
     std::fill(data_.begin(), data_.end(), 0.0f);
 }
 
+float AudioBuffer::get_sample(size_t channel, size_t frame) const {
+    if (channel >= num_channels_ || frame >= num_frames_) {
+        return 0.0f;
+    }
+    return data_[channel * num_frames_ + frame];
+}
+
+void AudioBuffer::set_sample(size_t channel, size_t frame, float value) {
+    if (channel < num_channels_ && frame < num_frames_) {
+        data_[channel * num_frames_ + frame] = value;
+    }
+}
+
 }

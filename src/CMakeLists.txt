@@ -2,6 +2,7 @@ add_library(my_toolkit
     audio_buffer.cpp
     sine_wave_player.cpp
     miniaudio_impl.cpp
+    audio_engine.cpp
 )
 
 target_include_directories(my_toolkit
