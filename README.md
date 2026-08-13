@@ -1,0 +1,1 @@
+![C++ CI](https://github.com/YingChenCheng/audio-toolkit/actions/workflows/ci.yml/badge.svg)
