@@ -13,13 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run clang-format style check
-        uses: pavelzw/clang-format-action@v2
-        with:
-          source: 'include src apps tests'
-          exclude: './build'
-          extensions: 'hpp,cpp,c,h'
-          clangFormatVersion: 16
+      - name: Install clang-format
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format-16
+
+      - name: Run clang-format dry-run check
+        run: |
+          find include src apps tests -type f \( -name "*.hpp" -o -name "*.cpp" \) \
+            | xargs clang-format-16 --dry-run --Werror
 
   static-analysis:
     name: Static Analysis (clang-tidy)
