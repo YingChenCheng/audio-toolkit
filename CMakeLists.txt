@@ -46,3 +46,18 @@ if(BUILD_TESTS)
 
     add_subdirectory(tests)
 endif()
+
+option(ENABLE_CLANG_TIDY "Enable clang-tidy static analysis" OFF)
+
+if(ENABLE_CLANG_TIDY)
+    find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
+    if(CLANG_TIDY_EXE)
+        message(STATUS "clang-tidy found: ${CLANG_TIDY_EXE}")
+        set(CMAKE_CXX_CLANG_TIDY 
+            ${CLANG_TIDY_EXE};
+            -checks=-*,bugprone-*,clang-analyzer-*,cppcoreguidelines-*,modernize-*,performance-*
+        )
+    else()
+        message(WARNING "clang-tidy requested but not found!")
+    endif()
+endif()
