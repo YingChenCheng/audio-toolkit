@@ -4,13 +4,14 @@
 namespace audio_toolkit {
 
 class GainNode : public AudioNode {
-public:
+  public:
     explicit GainNode(float gain_linear = 0.2f) : gain_(gain_linear) {}
 
     void set_gain(float gain_linear) { gain_ = gain_linear; }
 
-    void process(AudioBuffer& buffer) override {
-        if (!enabled_) return;
+    void process(AudioBuffer &buffer) override {
+        if (!enabled_)
+            return;
 
         const size_t channels = buffer.get_num_channels();
         const size_t frames = buffer.get_num_frames();
@@ -23,8 +24,8 @@ public:
         }
     }
 
-private:
+  private:
     float gain_;
 };
 
-}
+} // namespace audio_toolkit

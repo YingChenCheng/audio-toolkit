@@ -6,14 +6,15 @@
 namespace audio_toolkit {
 
 class SineWaveNode : public AudioNode {
-public:
+  public:
     SineWaveNode(float frequency = 440.0f, float sample_rate = 48000.0f)
         : frequency_(frequency), sample_rate_(sample_rate) {}
 
     void set_frequency(float freq) { frequency_ = freq; }
 
-    void process(AudioBuffer& buffer) override {
-        if (!enabled_) return;
+    void process(AudioBuffer &buffer) override {
+        if (!enabled_)
+            return;
 
         const double phase_increment = 2.0 * std::numbers::pi * frequency_ / sample_rate_;
         const size_t channels = buffer.get_num_channels();
@@ -32,10 +33,10 @@ public:
         }
     }
 
-private:
+  private:
     float frequency_;
     float sample_rate_;
     double phase_{0.0};
 };
 
-}
+} // namespace audio_toolkit

@@ -1,13 +1,13 @@
+#include <algorithm>
+#include <cmath>
 #include <gtest/gtest.h>
 #include <my_toolkit/audio_buffer.hpp>
-#include <my_toolkit/sine_wave_node.hpp>
 #include <my_toolkit/biquad_filter_node.hpp>
-#include <cmath>
-#include <algorithm>
+#include <my_toolkit/sine_wave_node.hpp>
 
 namespace audio_toolkit {
 
-float calculate_peak(const AudioBuffer& buffer, size_t channel = 0) {
+float calculate_peak(const AudioBuffer &buffer, size_t channel = 0) {
     float max_val = 0.0f;
     for (size_t frame = 0; frame < buffer.get_num_frames(); ++frame) {
         max_val = std::max(max_val, std::abs(buffer.get_sample(channel, frame)));
@@ -15,7 +15,7 @@ float calculate_peak(const AudioBuffer& buffer, size_t channel = 0) {
     return max_val;
 }
 
-float calculate_rms(const AudioBuffer& buffer, size_t channel = 0) {
+float calculate_rms(const AudioBuffer &buffer, size_t channel = 0) {
     float sum_squares = 0.0f;
     const size_t frames = buffer.get_num_frames();
     for (size_t frame = 0; frame < frames; ++frame) {
@@ -31,7 +31,7 @@ TEST(BiquadFilterTest, LowPassAttenuatesHighFrequency) {
 
     const float input_freq = 1000.0f;
     SineWaveNode sine_gen(input_freq, sample_rate);
-    
+
     AudioBuffer dry_buffer(1, num_frames);
     sine_gen.process(dry_buffer);
 
@@ -50,7 +50,7 @@ TEST(BiquadFilterTest, LowPassAttenuatesHighFrequency) {
     }
 
     float wet_peak = calculate_peak(steady_state_buffer);
-    float wet_rms  = calculate_rms(steady_state_buffer);
+    float wet_rms = calculate_rms(steady_state_buffer);
 
     EXPECT_LT(wet_peak, 0.15f);
     EXPECT_LT(wet_rms, 0.10f);
@@ -63,4 +63,4 @@ TEST(BiquadFilterTest, LowPassAttenuatesHighFrequency) {
     EXPECT_NEAR(bypass_peak, dry_peak, 1e-4f);
 }
 
-}
+} // namespace audio_toolkit

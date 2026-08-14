@@ -30,3 +30,6 @@ cmake-build-*/
 
 # Mac OS System files
 .DS_Store
+
+# Package Dependencies
+node_modules/

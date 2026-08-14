@@ -1,7 +1,7 @@
+#include <cmath>
 #include <gtest/gtest.h>
 #include <my_toolkit/sine_wave_player.hpp>
 #include <vector>
-#include <cmath>
 
 TEST(SineWaveTest, CallbackOutputBoundsAndFrequency) {
     const float sample_rate = 48000.0f;
@@ -9,9 +9,9 @@ TEST(SineWaveTest, CallbackOutputBoundsAndFrequency) {
     const size_t frame_count = 512;
 
     audio_toolkit::SineWavePlayer player(frequency, sample_rate);
-    
+
     std::vector<float> output_buffer(frame_count, 0.0f);
-    
+
     player.audio_callback(output_buffer.data(), nullptr, frame_count);
 
     EXPECT_NEAR(output_buffer[0], 0.0f, 1e-5f);

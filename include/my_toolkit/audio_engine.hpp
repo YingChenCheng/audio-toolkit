@@ -1,15 +1,15 @@
 #pragma once
 #include "my_toolkit/audio_buffer.hpp"
 #include "my_toolkit/audio_node.hpp"
+#include <atomic>
+#include <memory>
 #include <miniaudio.h>
 #include <vector>
-#include <memory>
-#include <atomic>
 
 namespace audio_toolkit {
 
 class AudioEngine {
-public:
+  public:
     AudioEngine(size_t sample_rate = 48000, size_t channels = 1);
     ~AudioEngine();
 
@@ -18,9 +18,9 @@ public:
     bool start();
     void stop();
 
-    void audio_callback(float* output_buffer, size_t frame_count);
+    void audio_callback(float *output_buffer, size_t frame_count);
 
-private:
+  private:
     size_t sample_rate_;
     size_t channels_;
     ma_device device_;
@@ -30,4 +30,4 @@ private:
     AudioBuffer internal_buffer_;
 };
 
-}
+} // namespace audio_toolkit
