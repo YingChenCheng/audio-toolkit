@@ -11,6 +11,7 @@ FetchContent_MakeAvailable(googletest)
 add_executable(unit_tests
     test_audio_buffer.cpp
     test_sine_wave.cpp
+    test_biquad_filter.cpp
 )
 
 target_link_libraries(unit_tests
